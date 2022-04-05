@@ -26,7 +26,7 @@ namespace PokeDexterApp
                 throw new ArgumentException();
             }
             
-            await PopulatePokemonData(pokemonSearchTextBox.Text);
+            await PopulatePokemonData(pokemonSearchTextBox.Text.ToLower());
         }
 
        private async Task PopulatePokemonData(string name)
