@@ -5,27 +5,29 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using PokeApiNet;
 
-namespace PokeDexter.Processor
+namespace PokeDexter.Controller
 {
-    public static class PokemonProcessor
+    public static class PokemonController
     {
-        static PokeApiClient s_pokeClient = new PokeApiClient();
+        public static bool PokemonDataGetSuccess = true;
         
+        private static readonly PokeApiClient s_pokeClient = new PokeApiClient();
+        private static string s_lastGoodResponse = "unown";
+
         public static async Task<Pokemon> LoadPokemonData(string name)
         {
             var url = $"https://pokeapi.co/api/v2/pokemon/{name}";
 
-            using (HttpResponseMessage response = await ApiHelper.ApiClient.GetAsync(url))
+            using HttpResponseMessage response = await ApiHelper.ApiClient.GetAsync(url);
+            if (response.IsSuccessStatusCode)
             {
-                if (response.IsSuccessStatusCode)
-                {
-                    return await s_pokeClient.GetResourceAsync<Pokemon>(name);
-                }
-                else
-                {
-                    throw new Exception(response.ReasonPhrase);
-                }
+                PokemonDataGetSuccess = true;
+                s_lastGoodResponse = name;
+                return await s_pokeClient.GetResourceAsync<Pokemon>(name);
             }
+
+            PokemonDataGetSuccess = false;
+            return await s_pokeClient.GetResourceAsync<Pokemon>(s_lastGoodResponse);
         }
         
         public static async Task<PokemonSpecies> LoadPokemonSpeciesData(int id)

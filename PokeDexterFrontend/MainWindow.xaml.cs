@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using System.Windows;
 using PokeDexter;
-using PokeDexter.Processor;
+using PokeDexter.Controller;
 
 namespace PokeDexterApp
 {
@@ -16,7 +16,7 @@ namespace PokeDexterApp
 
        private async void Window_Loaded(object sender, RoutedEventArgs e)
        {
-           
+           await Task.CompletedTask;
        }
 
        private async void pokemonSearchButton_Click(object sender, RoutedEventArgs e)
@@ -31,14 +31,16 @@ namespace PokeDexterApp
 
        private async Task PopulatePokemonData(string name)
         {
-            var pokemonData = await PokemonProcessor.LoadPokemonData(name);
-            var pokemonSpecies = await PokemonProcessor.LoadPokemonSpeciesData(pokemonData.Id);
+            var pokemonData = await PokemonController.LoadPokemonData(name);
+            var pokemonSpecies = await PokemonController.LoadPokemonSpeciesData(pokemonData.Id);
 
-            pokemonName.Text = pokemonData.Name.ToUpper();
+            searchFailedText.Opacity = PokemonController.PokemonDataGetSuccess ? 0 : 1;
+            
+            pokemonName.Text = $"{pokemonData.Name} (#{pokemonData.Id})".ToUpper();
             pokemonHabitat.Text = pokemonSpecies.Habitat.Name;
-            pokemonIsLegendary.Text = pokemonSpecies.IsLegendary.ToString();
-            pokemonSprite.Source = PokemonProcessor.GetPokemonSprite(pokemonData);
-            pokemonDescription.Text = PokemonProcessor.GetDescriptionText(pokemonSpecies);
+            pokemonIsLegendary.Text = pokemonSpecies.IsLegendary ? "Yes" : "No";
+            pokemonDescription.Text = PokemonController.GetDescriptionText(pokemonSpecies);
+            pokemonSprite.Source = PokemonController.GetPokemonSprite(pokemonData);
         }
     }
 }
