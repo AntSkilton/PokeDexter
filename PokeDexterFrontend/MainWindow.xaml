@@ -22,7 +22,7 @@
         </StackPanel>
       
       <StackPanel Grid.Column="1" Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Left">
-          <TextBlock x:Name="searchFailedText" Padding="5" Margin="5" Text="Search failed, try again..." Width="170" Height="30" Opacity="0" Background="Brown"></TextBlock>
+          <TextBlock x:Name="searchFailedText" Padding="5" Margin="5" Width="170" Height="30" Opacity="0" Background="Brown"></TextBlock>
       </StackPanel>
         
         <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="20">
@@ -47,6 +47,11 @@
             <WrapPanel HorizontalAlignment="Stretch">
                 <TextBlock x:Name="descriptionLabel" Width="100" Padding="5" Margin="5">Description:</TextBlock>
                 <TextBlock x:Name="pokemonDescription" Width="220" TextWrapping="Wrap" Padding="5" Margin="5"></TextBlock>
+            </WrapPanel>
+            
+            <WrapPanel HorizontalAlignment="Stretch">
+                <TextBlock x:Name="altDescriptionLabel" Width="100" Padding="5" Margin="5">Alt Description:</TextBlock>
+                <TextBlock x:Name="altDescription" Width="220" TextWrapping="Wrap" Padding="5" Margin="5"></TextBlock>
             </WrapPanel>
             
         </StackPanel>

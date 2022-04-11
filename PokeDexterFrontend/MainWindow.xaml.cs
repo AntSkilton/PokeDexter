@@ -35,12 +35,40 @@ namespace PokeDexterApp
             var pokemonSpecies = await PokemonController.LoadPokemonSpeciesData(pokemonData.Id);
 
             searchFailedText.Opacity = PokemonController.PokemonDataGetSuccess ? 0 : 1;
-            
+            searchFailedText.Text = PokemonController.PokemonDataGetSuccess ? "" : "Pokemon not found...";
+
             pokemonName.Text = $"{pokemonData.Name} (#{pokemonData.Id})".ToUpper();
             pokemonHabitat.Text = pokemonSpecies.Habitat.Name;
             pokemonIsLegendary.Text = pokemonSpecies.IsLegendary ? "Yes" : "No";
-            pokemonDescription.Text = PokemonController.GetDescriptionText(pokemonSpecies);
             pokemonSprite.Source = PokemonController.GetPokemonSprite(pokemonData);
+            
+            string originalDescriptionText = PokemonController.GetDescriptionText(pokemonSpecies);
+            pokemonDescription.Text = originalDescriptionText;
+
+            if (string.Equals(pokemonSpecies.Habitat.Name, "cave") || pokemonSpecies.IsLegendary)
+            {
+                var yodaText = await TranslatorController.
+                    TranslateText(TranslatorController.TranslationModelType.Yoda, originalDescriptionText);
+
+                if (TranslatorController.RequestGetSuccess)
+                {
+                    altDescription.Text = yodaText.Contents["translated"];
+                }
+            }
+            else
+            {
+                var shakespeareText = await TranslatorController.
+                    TranslateText(TranslatorController.TranslationModelType.Shakespeare, originalDescriptionText);
+
+                if (TranslatorController.RequestGetSuccess)
+                {
+                    altDescription.Text = shakespeareText.Contents["translated"];
+                }
+               
+            }
+
+            searchFailedText.Opacity = TranslatorController.RequestGetSuccess ? 0 : 1;
+            searchFailedText.Text = TranslatorController.RequestGetSuccess ? "" : "Too many API requests...";
         }
     }
 }

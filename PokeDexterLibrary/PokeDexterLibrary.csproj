@@ -166,7 +166,7 @@
   <ItemGroup>
     <Compile Include="ApiHelper.cs" />
     <Compile Include="Model\PokemonModel.cs" />
-    <Compile Include="Model\ShakespeareModel.cs" />
+    <Compile Include="Model\FunTranslationsModel.cs" />
     <Compile Include="Controller\PokemonController.cs" />
     <Compile Include="Controller\TranslatorControllercs.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
