@@ -9,7 +9,7 @@ This standalone app returns some Pokemon lookup data.
 2. Run `PokeDexterApp.exe`. If UAC pops up, select "More Info" and then "Run Anyway".
 3. Enter any Pokemon name or it's number in the search bar to find some information about it.
 ---
-These is search validation, and there's an easter egg if you fail an input on the first try.
+There is search validation, and there's an easter egg if you fail a valid input on the first try.
 
 The alternative description processes the description into either a Shakespeare or Yoda translation via the Fun Translations API. There are only 5 free requests per hour, so error handling is in place for when too many requests are made.
 
