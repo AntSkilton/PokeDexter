@@ -15,6 +15,8 @@ This standalone app returns some Pokemon lookup data.
 2. External packages will be missing which you'll need to get via NuGet. `Alt + Shift + N` to bring up the menu, then `NuGet Force Restore` should retrieve key packages such as Asp.Net WebApi Client PokeApiNet, Newtonsoft JSON and other dependencies.
 3. You'll find the business logic in the `PokeDexterLibrary` project, and the WPF built frontend  available in the `PokeDexterFrontend` project.
 
+---
+
 There is search validation, and there's an easter egg if you fail an input on the first try. Hint: It returns a specific Pokemon.
 
 The alternative description processes the description into either a Shakespeare or Yoda translation via the Fun Translations API. There are only 5 free requests per hour, so error handling is in place for when too many requests are made.
